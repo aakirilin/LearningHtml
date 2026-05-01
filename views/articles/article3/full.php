@@ -1,0 +1,1 @@
+<?php $_SESSION['page_title'] = 'Заметки'; ?>
