@@ -1,1 +1,1 @@
-<?php $_SESSION['page_title'] = 'Заметки'; ?>
+<?php $_SESSION['page_title_ru'] = 'Заметки'; $_SESSION['page_title_en'] = 'Notes'; ?>

@@ -1,10 +1,19 @@
 <?php
-    session_start();
+    function print_r_l($ru_text, $en_text)
+    {
+        global $language;
+        if($language == 'ru'){
+            print_r($ru_text);
+        }
+        if($language == 'en'){
+            print_r($en_text);
+        }
+    }
 
     function render_php($path, $state)
     {
         ob_start();
-        include($path);
+        include_once($path);
         $var=ob_get_contents(); 
         ob_end_clean();
         return $var;
@@ -19,6 +28,9 @@
     class State{
 
     }
+
+    session_start();
+
 ?>
 
 
@@ -26,8 +38,17 @@
     //prepare render main
     $page = explode('?', $_SERVER['REQUEST_URI'])[0];
     if($page == '/'){
-        $page = '/home';
+        $page = '/ru/home';
     }
+    if($page == '/ru'){
+        $page = '/ru/home';
+    }
+    if($page == '/en'){
+        $page = '/en/home';
+    }
+   
+    $language = substr($page, 1, 2);
+    $page = substr($page, 3, $page->length);
 
     $file_name = '../views' . $page . '.php';
     $state = new State();
@@ -52,7 +73,7 @@
     $state = new State();
     foreach($articles as $article){
         $article_file_name = $dir . '/' . $article . '/short.php';
-        $article_href = '/articles/' . $article . '/full';
+        $article_href = '/' . $language . '/articles/' . $article . '/full';
         $main_section_short_articles = $main_section_short_articles .'<article class="article"><a href="' . $article_href . '">';
         $main_section_short_articles = $main_section_short_articles . render_php($article_file_name, $state);
         $main_section_short_articles = $main_section_short_articles . '</article>';

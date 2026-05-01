@@ -1,4 +1,4 @@
-<?php $_SESSION['page_title'] = 'Фотографии'; ?>
+<?php $_SESSION['page_title_ru'] = 'Фотографии'; $_SESSION['page_title_en'] = 'Photos'; ?>
 <?php
 
     $dir = '../public/imgs/gallery';
